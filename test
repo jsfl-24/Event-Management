@@ -1,0 +1,28 @@
+'use client';
+import Link from 'next/link';
+
+const events = [
+  { name: 'Hackathon', slug: 'hackathon' },
+  { name: 'Robotics Challenge', slug: 'robotics' },
+  { name: 'Tech Quiz', slug: 'techquiz' },
+];
+
+export default function HomePage() {
+  return (
+    <main className="p-6">
+      <h1 className="text-4xl font-bold mb-4">Welcome to TechFest 2025</h1>
+      <p className="mb-6">Join us for exciting tech events and competitions!</p>
+      <div className="grid gap-4">
+        {events.map((event) => (
+          <Link
+            key={event.slug}
+            href={`/events/${event.slug}`}
+            className="block border p-4 rounded hover:bg-gray-100"
+          >
+            {event.name}
+          </Link>
+        ))}
+      </div>
+    </main>
+  );
+}
