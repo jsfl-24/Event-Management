@@ -1,87 +1,104 @@
+"use client";
+
+import Image from "next/image";
+
 export default function SponsorsSection() {
-  const titleSponsors = [
-    { name: "TECH CORP", color: "text-cyan-400" },
-    { name: "INNOVATE INC", color: "text-purple-400" },
-  ];
-
-  const goldSponsors = ["STARTUP A", "COMPANY B", "FIRM C", "BRAND D"];
-
-  const silverSponsors = [
-    "SPONSOR 1",
-    "SPONSOR 2",
-    "SPONSOR 3",
-    "SPONSOR 4",
-    "SPONSOR 5",
-    "SPONSOR 6",
+  const sponsors = [
+    {
+      name: "Microsoft",
+      logo: "https://logos-world.net/wp-content/uploads/2020/09/Microsoft-Logo.png",
+    },
+    {
+      name: "Google",
+      logo: "https://logos-world.net/wp-content/uploads/2020/09/Google-Logo.png",
+    },
+    {
+      name: "Apple",
+      logo: "https://logos-world.net/wp-content/uploads/2020/04/Apple-Logo.png",
+    },
+    {
+      name: "Amazon",
+      logo: "https://logos-world.net/wp-content/uploads/2020/04/Amazon-Logo.png",
+    },
+    {
+      name: "Meta",
+      logo: "https://logos-world.net/wp-content/uploads/2021/10/Meta-Logo.png",
+    },
+    {
+      name: "Netflix",
+      logo: "https://logos-world.net/wp-content/uploads/2020/04/Netflix-Logo.png",
+    },
+    {
+      name: "Tesla",
+      logo: "https://logos-world.net/wp-content/uploads/2020/09/Tesla-Logo.png",
+    },
+    {
+      name: "Spotify",
+      logo: "https://logos-world.net/wp-content/uploads/2020/06/Spotify-Logo.png",
+    },
   ];
 
   return (
-    <section id="sponsors" className="py-20 bg-gray-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Our Sponsors
-          </h2>
-          <p className="text-xl text-gray-400">
-            Powered by industry leaders and tech innovators
-          </p>
-        </div>
+    <>
+      <section id="sponsors" className="py-20 bg-zinc-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Our Sponsors
+            </h2>
+            <p className="text-xl text-zinc-400">
+              Powered by industry leaders and tech innovators
+            </p>
+          </div>
 
-        {/* Title Sponsors */}
-        <div className="mb-12">
-          <h3 className="text-2xl font-bold text-center text-cyan-400 mb-8">
-            Title Sponsors
-          </h3>
-          <div className="flex justify-center items-center space-x-8">
-            {titleSponsors.map((sponsor, index) => (
-              <div
-                key={index}
-                className="bg-gray-700 p-8 rounded-lg shadow-lg shadow-gray-900/50 hover:shadow-cyan-500/20 transition duration-300 border border-gray-600"
-              >
-                <div className={`text-4xl font-bold ${sponsor.color}`}>
-                  {sponsor.name}
+          {/* Infinite Marquee Container */}
+          <div className="relative overflow-hidden bg-zinc-800 rounded-lg py-8">
+            <div className="flex animate-infinite-scroll whitespace-nowrap">
+              {/* Multiple repetitions for seamless infinite scroll */}
+              {[...Array(4)].map((_, setIndex) => (
+                <div key={setIndex} className="flex space-x-16 mr-16">
+                  {sponsors.map((sponsor, index) => (
+                    <div
+                      key={`${setIndex}-${index}`}
+                      className="flex-shrink-0 flex items-center justify-center w-48 h-24 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+                    >
+                      <Image
+                        src={sponsor.logo}
+                        alt={sponsor.name}
+                        width={160}
+                        height={80}
+                        className="object-contain p-4"
+                        unoptimized
+                      />
+                    </div>
+                  ))}
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
+      </section>
 
-        {/* Gold Sponsors */}
-        <div className="mb-12">
-          <h3 className="text-xl font-bold text-center text-yellow-400 mb-6">
-            Gold Sponsors
-          </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {goldSponsors.map((sponsor, index) => (
-              <div
-                key={index}
-                className="bg-gray-700 p-6 rounded-lg shadow-lg shadow-gray-900/50 hover:shadow-cyan-500/20 transition duration-300 text-center border border-gray-600"
-              >
-                <div className="text-2xl font-bold text-yellow-400">
-                  {sponsor}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+      {/* Enhanced CSS for infinite scrolling */}
+      <style jsx global>{`
+        @keyframes infinite-scroll {
+          from {
+            transform: translateX(0);
+          }
+          to {
+            transform: translateX(-100%);
+          }
+        }
 
-        {/* Silver Sponsors */}
-        <div>
-          <h3 className="text-lg font-bold text-center text-gray-400 mb-6">
-            Silver Sponsors
-          </h3>
-          <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
-            {silverSponsors.map((sponsor, index) => (
-              <div
-                key={index}
-                className="bg-gray-700 p-4 rounded-lg shadow-lg shadow-gray-900/50 hover:shadow-cyan-500/20 transition duration-300 text-center border border-gray-600"
-              >
-                <div className="text-sm font-bold text-gray-300">{sponsor}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
+        .animate-infinite-scroll {
+          animation: infinite-scroll 25s linear infinite;
+          width: calc(400% + 64px); /* 4 sets * 100% + spacing */
+        }
+
+        .animate-infinite-scroll:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
+    </>
   );
 }
