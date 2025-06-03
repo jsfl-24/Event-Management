@@ -96,9 +96,16 @@ export default function EventsSection() {
 
   return (
     <>
-      {/* Key Events Section */}
-      <section id="events" className="py-20 bg-zinc-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Key Events Section with Clean Glassmorphism */}
+      <section
+        id="events"
+        className="py-20 bg-zinc-900 relative overflow-hidden"
+      >
+        {/* Subtle background decoration */}
+        <div className="absolute top-20 left-20 w-96 h-96  blur-3xl"></div>
+        <div className="absolute bottom-20 right-20 w-72 h-72 bg-white/3 rounded-full blur-3xl"></div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               Key Events
@@ -111,19 +118,27 @@ export default function EventsSection() {
             {keyEvents.map((event, index) => (
               <div
                 key={index}
-                className="bg-zinc-700 rounded-lg shadow-lg p-6 hover:shadow-xl hover:shadow-zinc-500/20 transition duration-300 border border-zinc-600"
+                className="backdrop-blur-md bg-white/10 rounded-xl shadow-2xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300 hover:scale-105"
+                style={{
+                  background: "rgba(255, 255, 255, 0.08)",
+                  backdropFilter: "blur(16px)",
+                  border: "1px solid rgba(255, 255, 255, 0.18)",
+                  boxShadow: "0 8px 32px 0 rgba(65, 16, 108, 0.3)",
+                }}
               >
                 <h3 className="text-xl font-bold mb-3 text-white">
                   {event.title}
                 </h3>
-                <p className="text-zinc-300 mb-4">{event.description}</p>
-                <div className="text-sm text-zinc-400 mb-4">
+                <p className="text-zinc-300 mb-4 leading-relaxed">
+                  {event.description}
+                </p>
+                <div className="text-sm text-zinc-400 mb-6 space-y-1">
                   <p>Date: {event.date}</p>
                   <p>Time: {event.time}</p>
                 </div>
                 <Link
                   href={event.registrationLink}
-                  className="inline-block bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-red-700 transition duration-300"
+                  className="inline-block bg-white/20 backdrop-blur-sm text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-white/30 transition-all duration-300 border border-white/30"
                 >
                   Register Now
                 </Link>
@@ -134,7 +149,7 @@ export default function EventsSection() {
       </section>
 
       {/* All Events Section */}
-      <section className="py-20 bg-zinc-900">
+      <section className="py-20 bg-zinc-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
@@ -147,7 +162,7 @@ export default function EventsSection() {
 
           {/* Technical Events */}
           <div className="mb-16">
-            <h3 className="text-2xl font-bold text-red-400 mb-8 text-center">
+            <h3 className="text-2xl font-bold text-white mb-8 text-center">
               Technical Events
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -156,7 +171,7 @@ export default function EventsSection() {
                 .map((event, index) => (
                   <div
                     key={index}
-                    className="bg-zinc-800 rounded-lg shadow-lg p-6 hover:shadow-xl hover:shadow-red-500/20 transition duration-300 border border-zinc-700"
+                    className="bg-zinc-700 rounded-lg shadow-lg p-6 hover:shadow-xl hover:shadow-zinc-500/20 transition duration-300 border border-zinc-600"
                   >
                     <h4 className="text-lg font-bold mb-3 text-white">
                       {event.title}
@@ -170,7 +185,7 @@ export default function EventsSection() {
                     </div>
                     <Link
                       href={event.registrationLink}
-                      className="inline-block bg-red-600 text-white px-3 py-1.5 rounded text-xs font-semibold hover:bg-red-700 transition duration-300"
+                      className="inline-block bg-zinc-600 text-white px-3 py-1.5 rounded text-xs font-semibold hover:bg-zinc-500 transition duration-300"
                     >
                       Register
                     </Link>
@@ -181,7 +196,7 @@ export default function EventsSection() {
 
           {/* Non-Technical Events */}
           <div>
-            <h3 className="text-2xl font-bold text-yellow-400 mb-8 text-center">
+            <h3 className="text-2xl font-bold text-white mb-8 text-center">
               Non-Technical Events
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -190,7 +205,7 @@ export default function EventsSection() {
                 .map((event, index) => (
                   <div
                     key={index}
-                    className="bg-zinc-800 rounded-lg shadow-lg p-6 hover:shadow-xl hover:shadow-yellow-500/20 transition duration-300 border border-zinc-700"
+                    className="bg-zinc-700 rounded-lg shadow-lg p-6 hover:shadow-xl hover:shadow-zinc-500/20 transition duration-300 border border-zinc-600"
                   >
                     <h4 className="text-lg font-bold mb-3 text-white">
                       {event.title}
@@ -204,7 +219,7 @@ export default function EventsSection() {
                     </div>
                     <Link
                       href={event.registrationLink}
-                      className="inline-block bg-yellow-600 text-white px-3 py-1.5 rounded text-xs font-semibold hover:bg-yellow-700 transition duration-300"
+                      className="inline-block bg-zinc-600 text-white px-3 py-1.5 rounded text-xs font-semibold hover:bg-zinc-500 transition duration-300"
                     >
                       Register
                     </Link>
