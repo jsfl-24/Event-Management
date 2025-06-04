@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import api from "@/lib/api"; // Add this import
 
 interface User {
   id: string;
@@ -45,58 +46,30 @@ export default function LoginPage() {
     setIsSubmitting(true);
     setError("");
 
-    // Basic validation
     if (!formData.phone || !formData.password) {
       setError("Please fill in all fields");
       setIsSubmitting(false);
       return;
     }
 
-    if (formData.phone.length !== 10) {
-      setError("Please enter a valid 10-digit phone number");
-      setIsSubmitting(false);
-      return;
-    }
-
     try {
-      if (!isClient) {
-        setError("Unable to access browser storage");
-        setIsSubmitting(false);
-        return;
-      }
+      const response = await api.loginUser({
+        phone: formData.phone,
+        password: formData.password,
+      });
 
-      // Check if user exists in localStorage
-      const existingUsers: User[] = JSON.parse(
-        localStorage.getItem("users") || "[]"
-      );
-      const user = existingUsers.find(
-        (u: User) =>
-          u.phone === formData.phone && u.password === formData.password
-      );
-
-      if (!user) {
-        setError("Invalid phone number or password");
-        setIsSubmitting(false);
-        return;
-      }
-
-      // Simulate API call delay
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      // Remove password before storing user details
-      const { password, ...userDetails } = user;
-      localStorage.setItem("userDetails", JSON.stringify(userDetails));
+      // Store token and user data
+      localStorage.setItem("authToken", response.token);
+      localStorage.setItem("userDetails", JSON.stringify(response.user));
 
       setIsSubmitting(false);
 
-      // Check for redirect URL
+      // Redirect
       const redirectUrl = searchParams.get("redirect");
-
-      // Redirect to original page or home
       router.push(redirectUrl || "/");
-    } catch (error) {
+    } catch (error: any) {
       console.error("Login error:", error);
-      setError("Login failed. Please try again.");
+      setError(error.message || "Invalid phone number or password");
       setIsSubmitting(false);
     }
   };

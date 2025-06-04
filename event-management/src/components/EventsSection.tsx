@@ -1,314 +1,176 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 interface Event {
+  id: number;
   title: string;
   description: string;
   date: string;
   time: string;
-  registrationLink: string;
   fee: string;
-  feeAmount: number;
-  type: string;
+  fee_amount: number;
+  event_type: string;
   day: number;
+  is_key_event: boolean;
+  max_participants: number;
+  registered_count: number;
+  spots_left: number;
 }
 
-export default function EventsSection() {
-  const router = useRouter();
+interface EventsSectionProps {
+  events: Event[];
+}
 
-  const handleRegistration = (link: string) => {
-    console.log("Navigating to:", link);
-    router.push(link);
-  };
+export default function EventsSection({ events }: EventsSectionProps) {
+  const [selectedDay, setSelectedDay] = useState(1);
 
-  const keyEvents: Event[] = [
-    {
-      title: "AI/ML Workshop",
-      description:
-        "Hands-on workshop covering machine learning fundamentals and neural networks.",
-      date: "June 5, 2025",
-      time: "10:00 AM - 4:00 PM",
-      registrationLink: "/register/ai-ml",
-      fee: "₹299",
-      feeAmount: 299,
-      type: "technical",
-      day: 1,
-    },
-    {
-      title: "24-Hour Hackathon",
-      description:
-        "Non-stop coding marathon to build innovative solutions with fellow developers.",
-      date: "June 6, 2025",
-      time: "24 Hours",
-      registrationLink: "/register/hackathon",
-      fee: "₹499",
-      feeAmount: 499,
-      type: "technical",
-      day: 2,
-    },
-    {
-      title: "Startup Pitch",
-      description:
-        "Present your tech startup ideas to industry experts and investors.",
-      date: "June 5, 2025",
-      time: "2:00 PM - 6:00 PM",
-      registrationLink: "/register/startup-pitch",
-      fee: "Free",
-      feeAmount: 0,
-      type: "non-technical",
-      day: 1,
-    },
-  ];
+  // Filter events by selected day
+  const filteredEvents = events.filter((event) => event.day === selectedDay);
+  const keyEvents = filteredEvents.filter((event) => event.is_key_event);
+  const otherEvents = filteredEvents.filter((event) => !event.is_key_event);
 
-  const allEvents: Event[] = [
-    ...keyEvents,
-    {
-      title: "Cybersecurity Challenge",
-      description:
-        "Test your skills in ethical hacking and security protocols.",
-      date: "June 5, 2025",
-      time: "1:00 PM - 6:00 PM",
-      registrationLink: "/register/cybersecurity",
-      fee: "₹249",
-      feeAmount: 249,
-      type: "technical",
-      day: 1,
-    },
-    {
-      title: "UI/UX Design Contest",
-      description:
-        "Design user-friendly interfaces and exceptional user experiences.",
-      date: "June 5, 2025",
-      time: "11:00 AM - 3:00 PM",
-      registrationLink: "/register/design-contest",
-      fee: "₹149",
-      feeAmount: 149,
-      type: "non-technical",
-      day: 1,
-    },
-    {
-      title: "Innovation Ideas Showcase",
-      description: "Present your innovative ideas and creative solutions.",
-      date: "June 5, 2025",
-      time: "2:00 PM - 5:00 PM",
-      registrationLink: "/register/innovation",
-      fee: "Free",
-      feeAmount: 0,
-      type: "non-technical",
-      day: 1,
-    },
-    {
-      title: "Web Development Sprint",
-      description:
-        "Build responsive websites using modern frameworks and tools.",
-      date: "June 6, 2025",
-      time: "9:00 AM - 5:00 PM",
-      registrationLink: "/register/web-dev",
-      fee: "₹199",
-      feeAmount: 199,
-      type: "technical",
-      day: 2,
-    },
-    {
-      title: "Mobile App Development",
-      description: "Create cross-platform mobile applications from scratch.",
-      date: "June 6, 2025",
-      time: "10:00 AM - 4:00 PM",
-      registrationLink: "/register/mobile-dev",
-      fee: "₹299",
-      feeAmount: 299,
-      type: "technical",
-      day: 2,
-    },
-    {
-      title: "Gaming Tournament",
-      description: "Competitive gaming event featuring popular esports titles.",
-      date: "June 6, 2025",
-      time: "12:00 PM - 8:00 PM",
-      registrationLink: "/register/gaming",
-      fee: "₹199",
-      feeAmount: 199,
-      type: "non-technical",
-      day: 2,
-    },
-    {
-      title: "Tech Quiz Competition",
-      description:
-        "Test your knowledge in various technology domains and win prizes.",
-      date: "June 6, 2025",
-      time: "3:00 PM - 6:00 PM",
-      registrationLink: "/register/tech-quiz",
-      fee: "₹99",
-      feeAmount: 99,
-      type: "technical",
-      day: 2,
-    },
-  ];
-
-  // Filter events by day
-  const day1Events = allEvents.filter((event) => event.day === 1);
-  const day2Events = allEvents.filter((event) => event.day === 2);
+  if (events.length === 0) {
+    return (
+      <section className="py-20 px-4 bg-zinc-800">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-4xl font-bold text-white mb-4">
+            Loading Events...
+          </h2>
+          <p className="text-zinc-400">Please wait while we load the events.</p>
+        </div>
+      </section>
+    );
+  }
 
   return (
-    <>
-      {/* Key Events Section */}
-      <section
-        id="events"
-        className="py-20 bg-zinc-900 relative overflow-hidden"
-      >
-        <div className="absolute top-20 left-20 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-20 w-72 h-72 bg-white/3 rounded-full blur-3xl"></div>
+    <section id="events" className="py-20 px-4 bg-zinc-800">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold text-white mb-4">Event Schedule</h2>
+          <p className="text-zinc-400 text-lg">
+            Two days packed with exciting competitions and workshops
+          </p>
+        </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+        {/* Day Selector */}
+        <div className="flex justify-center mb-12">
+          <div className="bg-zinc-700 rounded-lg p-1 flex">
+            <button
+              onClick={() => setSelectedDay(1)}
+              className={`px-6 py-3 rounded-md font-semibold transition-colors ${
+                selectedDay === 1
+                  ? "bg-white text-black"
+                  : "text-zinc-300 hover:text-white"
+              }`}
+            >
+              Day 1 - June 5
+            </button>
+            <button
+              onClick={() => setSelectedDay(2)}
+              className={`px-6 py-3 rounded-md font-semibold transition-colors ${
+                selectedDay === 2
+                  ? "bg-white text-black"
+                  : "text-zinc-300 hover:text-white"
+              }`}
+            >
+              Day 2 - June 6
+            </button>
+          </div>
+        </div>
+
+        {/* Key Events */}
+        {keyEvents.length > 0 && (
+          <div className="mb-12">
+            <h3 className="text-2xl font-bold text-white mb-6 text-center">
               Key Events
-            </h2>
-            <p className="text-xl text-zinc-400">
-              Exciting lineup of tech competitions and workshops
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {keyEvents.map((event, index) => (
-              <div
-                key={index}
-                className="backdrop-blur-md bg-white/10 rounded-xl shadow-2xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300 hover:scale-105"
-              >
-                <div className="flex justify-between items-start mb-3">
-                  <h3 className="text-xl font-bold text-white">
-                    {event.title}
-                  </h3>
-                  <span className="bg-white/20 text-white text-xs px-2 py-1 rounded-full">
-                    Day {event.day}
-                  </span>
-                </div>
-                <p className="text-zinc-300 mb-4 leading-relaxed">
-                  {event.description}
-                </p>
-                <div className="text-sm text-zinc-400 mb-6 space-y-1">
-                  <p>📅 {event.date}</p>
-                  <p>🕒 {event.time}</p>
-                  <p>
-                    💰 <span className="text-green-400">{event.fee}</span>
-                  </p>
-                </div>
-                <button
-                  onClick={() => handleRegistration(event.registrationLink)}
-                  className="inline-block bg-white/20 backdrop-blur-sm text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-white/30 transition-all duration-300 border border-white/30"
-                >
-                  Register Now
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Day-wise Events Section */}
-      <section className="py-20 bg-zinc-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Event Schedule
-            </h2>
-            <p className="text-xl text-zinc-400">
-              Two days of tech innovation and learning
-            </p>
-          </div>
-
-          {/* Day 1 Events */}
-          <div className="mb-16">
-            <div className="text-center mb-8">
-              <h3 className="text-2xl font-bold text-white mb-2">
-                Day 1 - June 5, 2025
-              </h3>
-              <p className="text-zinc-400">Workshops, Pitches & Innovation</p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {day1Events.map((event, index) => (
-                <div
-                  key={index}
-                  className="bg-zinc-700 rounded-lg shadow-lg p-6 hover:shadow-xl hover:shadow-zinc-500/20 transition duration-300 border border-zinc-600 relative"
-                >
-                  <div className="absolute top-3 right-3">
-                    <span className="bg-blue-600 text-white text-xs px-2 py-1 rounded-full">
-                      Day 1
-                    </span>
-                  </div>
-                  <h4 className="text-lg font-bold mb-3 text-white pr-16">
-                    {event.title}
-                  </h4>
-                  <p className="text-zinc-300 mb-3 text-sm">
-                    {event.description}
-                  </p>
-                  <div className="text-xs text-zinc-400 mb-4">
-                    <p>Date: {event.date}</p>
-                    <p>Time: {event.time}</p>
-                    <p>
-                      Fee: <span className="text-green-400">{event.fee}</span>
-                    </p>
-                  </div>
-                  <Link
-                    href={event.registrationLink}
-                    className="inline-block bg-zinc-600 text-white px-3 py-1.5 rounded text-xs font-semibold hover:bg-zinc-500 transition duration-300"
-                    prefetch={false}
-                  >
-                    Register
-                  </Link>
-                </div>
+            </h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {keyEvents.map((event) => (
+                <EventCard key={event.id} event={event} isKeyEvent={true} />
               ))}
             </div>
           </div>
+        )}
 
-          {/* Day 2 Events */}
+        {/* Other Events */}
+        {otherEvents.length > 0 && (
           <div>
-            <div className="text-center mb-8">
-              <h3 className="text-2xl font-bold text-white mb-2">
-                Day 2 - June 6, 2025
-              </h3>
-              <p className="text-zinc-400">
-                Development, Gaming & Competitions
-              </p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {day2Events.map((event, index) => (
-                <div
-                  key={index}
-                  className="bg-zinc-700 rounded-lg shadow-lg p-6 hover:shadow-xl hover:shadow-zinc-500/20 transition duration-300 border border-zinc-600 relative"
-                >
-                  <div className="absolute top-3 right-3">
-                    <span className="bg-purple-600 text-white text-xs px-2 py-1 rounded-full">
-                      Day 2
-                    </span>
-                  </div>
-                  <h4 className="text-lg font-bold mb-3 text-white pr-16">
-                    {event.title}
-                  </h4>
-                  <p className="text-zinc-300 mb-3 text-sm">
-                    {event.description}
-                  </p>
-                  <div className="text-xs text-zinc-400 mb-4">
-                    <p>Date: {event.date}</p>
-                    <p>Time: {event.time}</p>
-                    <p>
-                      Fee: <span className="text-green-400">{event.fee}</span>
-                    </p>
-                  </div>
-                  <Link
-                    href={event.registrationLink}
-                    className="inline-block bg-zinc-600 text-white px-3 py-1.5 rounded text-xs font-semibold hover:bg-zinc-500 transition duration-300"
-                    prefetch={false}
-                  >
-                    Register
-                  </Link>
-                </div>
+            <h3 className="text-2xl font-bold text-white mb-6 text-center">
+              Other Events
+            </h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {otherEvents.map((event) => (
+                <EventCard key={event.id} event={event} isKeyEvent={false} />
               ))}
             </div>
           </div>
+        )}
+
+        {filteredEvents.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-zinc-400 text-lg">
+              No events scheduled for Day {selectedDay}
+            </p>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+function EventCard({
+  event,
+  isKeyEvent,
+}: {
+  event: Event;
+  isKeyEvent: boolean;
+}) {
+  return (
+    <div
+      className={`bg-zinc-700 rounded-lg p-6 hover:bg-zinc-600 transition-colors border-l-4 ${
+        isKeyEvent ? "border-red-500" : "border-green-500"
+      }`}
+    >
+      <div className="flex justify-between items-start mb-3">
+        <div>
+          <h4 className="text-xl font-semibold text-white mb-2">
+            {event.title}
+          </h4>
+          <p className="text-zinc-300 text-sm mb-2">{event.description}</p>
         </div>
-      </section>
-    </>
+        {isKeyEvent && (
+          <span className="bg-white text-black px-2 py-1 rounded text-xs font-semibold">
+            KEY EVENT
+          </span>
+        )}
+      </div>
+
+      <div className="space-y-2 text-sm">
+        <div className="flex items-center text-zinc-400">
+          <span className="mr-2">Date:</span>
+          <span>{event.date}</span>
+        </div>
+        <div className="flex items-center text-zinc-400">
+          <span className="mr-2">Time:</span>
+          <span>{event.time}</span>
+        </div>
+        <div className="flex items-center text-zinc-400">
+          <span className="mr-2">Fee:</span>
+          <span>{event.fee}</span>
+        </div>
+        <div className="flex items-center text-zinc-400">
+          <span className="mr-2">Spots:</span>
+          <span>{event.spots_left} spots left</span>
+        </div>
+      </div>
+
+      <Link href={`/register/${event.id}`}>
+        <button className="w-full mt-4 bg-white text-black py-2 px-4 rounded-lg font-semibold hover:bg-gray-200 transition duration-300">
+          Register Now
+        </button>
+      </Link>
+    </div>
   );
 }

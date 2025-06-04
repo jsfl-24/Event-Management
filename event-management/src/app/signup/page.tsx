@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import api from "@/lib/api"; // Add this import
 
 interface User {
   id: string;
@@ -145,50 +146,31 @@ export default function SignupPage() {
     }
 
     try {
-      if (!isClient) {
-        setError("Unable to access browser storage");
-        setIsSubmitting(false);
-        return;
-      }
-
-      // Get existing users
-      const existingUsers: User[] = JSON.parse(
-        localStorage.getItem("users") || "[]"
-      );
-
-      // Add new user
-      const newUser: User = {
-        id: Date.now().toString(),
-        name: formData.name.trim(),
-        email: formData.email.trim().toLowerCase(),
+      const userData = {
+        username: formData.phone, // Using phone as username
+        first_name: formData.name.split(" ")[0],
+        last_name: formData.name.split(" ").slice(1).join(" ") || "",
+        email: formData.email,
         phone: formData.phone,
         password: formData.password,
+        confirm_password: formData.confirmPassword,
         age: formData.age,
-        college: formData.college.trim(),
+        college: formData.college,
         year: formData.year,
-        branch: formData.branch.trim(),
-        createdAt: new Date().toISOString(),
+        branch: formData.branch,
       };
 
-      existingUsers.push(newUser);
+      const response = await api.registerUser(userData);
 
-      // Simulate API call delay
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      // Store users and current user data
-      localStorage.setItem("users", JSON.stringify(existingUsers));
-
-      // Remove password before storing user details
-      const { password, ...userDetails } = newUser;
-      localStorage.setItem("userDetails", JSON.stringify(userDetails));
+      // Store token and user data
+      localStorage.setItem("authToken", response.token);
+      localStorage.setItem("userDetails", JSON.stringify(response.user));
 
       setIsSubmitting(false);
-
-      // Redirect to home page
       router.push("/");
-    } catch (error) {
+    } catch (error: any) {
       console.error("Signup error:", error);
-      setError("Signup failed. Please try again.");
+      setError(error.message || "Signup failed. Please try again.");
       setIsSubmitting(false);
     }
   };
