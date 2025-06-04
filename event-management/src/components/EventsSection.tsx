@@ -8,7 +8,9 @@ export default function EventsSection() {
         "Hands-on workshop covering machine learning fundamentals and neural networks.",
       date: "June 5, 2025",
       time: "10:00 AM - 4:00 PM",
-      registrationLink: "#ai-ml-registration",
+      registrationLink: "/register/ai-ml",
+      fee: "₹299",
+      feeAmount: 299,
     },
     {
       title: "24-Hour Hackathon",
@@ -16,7 +18,9 @@ export default function EventsSection() {
         "Non-stop coding marathon to build innovative solutions with fellow developers.",
       date: "June 6, 2025",
       time: "24 Hours",
-      registrationLink: "#hackathon-registration",
+      registrationLink: "/register/hackathon",
+      fee: "₹499",
+      feeAmount: 499,
     },
     {
       title: "Startup Pitch",
@@ -24,7 +28,9 @@ export default function EventsSection() {
         "Present your tech startup ideas to industry experts and investors.",
       date: "June 5, 2025",
       time: "2:00 PM - 6:00 PM",
-      registrationLink: "#startup-pitch-registration",
+      registrationLink: "/register/startup-pitch",
+      fee: "Free",
+      feeAmount: 0,
     },
   ];
 
@@ -37,7 +43,7 @@ export default function EventsSection() {
         "Build responsive websites using modern frameworks and tools.",
       date: "June 6, 2025",
       time: "9:00 AM - 5:00 PM",
-      registrationLink: "#web-dev-registration",
+      registrationLink: "/register/web-dev",
       type: "technical",
     },
     {
@@ -46,7 +52,7 @@ export default function EventsSection() {
         "Test your skills in ethical hacking and security protocols.",
       date: "June 5, 2025",
       time: "1:00 PM - 6:00 PM",
-      registrationLink: "#cybersecurity-registration",
+      registrationLink: "/register/cybersecurity",
       type: "technical",
     },
     {
@@ -54,7 +60,7 @@ export default function EventsSection() {
       description: "Create cross-platform mobile applications from scratch.",
       date: "June 6, 2025",
       time: "10:00 AM - 4:00 PM",
-      registrationLink: "#mobile-dev-registration",
+      registrationLink: "/register/mobile-dev",
       type: "technical",
     },
     // Non-Technical Events
@@ -64,7 +70,7 @@ export default function EventsSection() {
         "Design user-friendly interfaces and exceptional user experiences.",
       date: "June 5, 2025",
       time: "11:00 AM - 3:00 PM",
-      registrationLink: "#design-contest-registration",
+      registrationLink: "/register/design-contest",
       type: "non-technical",
     },
     {
@@ -72,7 +78,7 @@ export default function EventsSection() {
       description: "Present your innovative ideas and creative solutions.",
       date: "June 5, 2025",
       time: "2:00 PM - 5:00 PM",
-      registrationLink: "#innovation-registration",
+      registrationLink: "/register/innovation",
       type: "non-technical",
     },
     {
@@ -81,7 +87,7 @@ export default function EventsSection() {
         "Test your knowledge in various technology domains and win prizes.",
       date: "June 6, 2025",
       time: "3:00 PM - 6:00 PM",
-      registrationLink: "#tech-quiz-registration",
+      registrationLink: "/register/tech-quiz",
       type: "non-technical",
     },
     {
@@ -89,7 +95,7 @@ export default function EventsSection() {
       description: "Competitive gaming event featuring popular esports titles.",
       date: "June 6, 2025",
       time: "12:00 PM - 8:00 PM",
-      registrationLink: "#gaming-registration",
+      registrationLink: "/register/gaming",
       type: "non-technical",
     },
   ];
@@ -102,7 +108,7 @@ export default function EventsSection() {
         className="py-20 bg-zinc-900 relative overflow-hidden"
       >
         {/* Subtle background decoration */}
-        <div className="absolute top-20 left-20 w-96 h-96  blur-3xl"></div>
+        <div className="absolute top-20 left-20 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-20 right-20 w-72 h-72 bg-white/3 rounded-full blur-3xl"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -123,7 +129,7 @@ export default function EventsSection() {
                   background: "rgba(255, 255, 255, 0.08)",
                   backdropFilter: "blur(16px)",
                   border: "1px solid rgba(255, 255, 255, 0.18)",
-                  boxShadow: "0 8px 32px 0 rgba(65, 16, 108, 0.3)",
+                  boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.3)",
                 }}
               >
                 <h3 className="text-xl font-bold mb-3 text-white">
