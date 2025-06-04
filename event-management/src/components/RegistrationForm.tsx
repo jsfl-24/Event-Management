@@ -175,10 +175,10 @@ export default function RegistrationForm({
           </Link>
           <h1 className="text-3xl font-bold text-white mb-2">{eventTitle}</h1>
           <div className="text-zinc-300 space-y-1">
-            <p>📅 {eventDate}</p>
-            <p>🕒 {eventTime}</p>
+            <p>Date: {eventDate}</p>
+            <p>Time: {eventTime}</p>
             <p>
-              💰 Registration Fee:{" "}
+              Registration Fee:{" "}
               <span className="text-green-400">{registrationFee}</span>
             </p>
           </div>

@@ -3,10 +3,18 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
+// Add this interface at the top of your file or in a separate types file
+interface UserDetails {
+  name?: string;
+  email?: string;
+  id?: string;
+  // Add other properties as needed
+}
+
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [userDetails, setUserDetails] = useState(null);
+  const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -79,6 +87,12 @@ export default function Navigation() {
           <div className="hidden md:flex items-center space-x-4">
             {userDetails ? (
               <div className="flex items-center space-x-3">
+                <Link
+                  href="/dashboard"
+                  className="text-zinc-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition duration-300"
+                >
+                  Dashboard
+                </Link>
                 <span className="text-zinc-300 text-sm">
                   Welcome, {userDetails.name?.split(" ")[0]}!
                 </span>
