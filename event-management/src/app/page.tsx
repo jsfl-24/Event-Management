@@ -1,31 +1,49 @@
+// src/app/page.tsx
 import Link from 'next/link';
 
 export default function HomePage() {
   const events = [
-    { name: 'Coding Event', slug: 'coding' },
-    { name: 'Robotics Event', slug: 'robotics' },
-    { name: 'Design Event', slug: 'design' },
+    {
+      name: 'Coding Event',
+      slug: 'coding',
+      description: 'A competitive programming challenge for all skill levels.',
+    },
+    {
+      name: 'Robotics Event',
+      slug: 'robotics',
+      description: 'Build and battle bots in this exciting robotics showdown.',
+    },
+    {
+      name: 'Design Event',
+      slug: 'design',
+      description: 'Show off your creativity in our UI/UX design competition.',
+    },
   ];
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-purple-700 to-blue-500 text-white p-8">
       <h1 className="text-4xl font-bold mb-6 text-center">Welcome to TechFest 2025</h1>
       <p className="text-center mb-10 text-lg max-w-xl mx-auto">
-        Join us for an exciting series of technology events, workshops, and competitions!
+        Join us for a series of thrilling tech events, workshops, and competitions!
       </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+      <section id="events" className="max-w-4xl mx-auto space-y-8">
         {events.map(event => (
-          <Link
+          <div
             key={event.slug}
-            href={`/events/${event.slug}`}
-            className="bg-white text-black p-6 rounded-xl shadow hover:scale-105 transition-transform"
+            className="bg-white text-black p-6 rounded-xl shadow-md space-y-3"
           >
-            <h2 className="text-xl font-bold">{event.name}</h2>
-            <p className="text-sm mt-2">Click to register now!</p>
-          </Link>
+            <h2 className="text-2xl font-bold">{event.name}</h2>
+            <p>{event.description}</p>
+            <Link
+              href={`/events/${event.slug}`}
+              className="inline-block mt-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+            >
+              Register Now
+            </Link>
+          </div>
         ))}
-      </div>
+      </section>
     </main>
   );
 }
