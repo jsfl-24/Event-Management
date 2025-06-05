@@ -1,4 +1,4 @@
-# TakeDown 2.0 - Event Management System
+# TakeDown 2.0 - Event Registeration System
 ### Complete Full-Stack Technical Documentation
 
 ![TakeDown 2.0](https://img.shields.io/badge/TakeDown-2.0-blue.svg)
@@ -7,7 +7,7 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue.svg)
 ![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
 
-A comprehensive event management system designed for **Universal Engineering College's** tech festival. This full-stack application provides seamless event discovery, user registration, and administrative management capabilities for college-level technical events.
+A comprehensive event registration system designed for **Universal Engineering College's** tech festival. This full-stack application provides seamless event discovery, user registration, and administrative management capabilities for college-level technical events.
 
 ---
 
@@ -15,19 +15,17 @@ A comprehensive event management system designed for **Universal Engineering Col
 ##  Project Overview
 
 ### Problem Statement
-College tech festivals require efficient management of multiple events, user registrations, and administrative oversight. Traditional manual processes are time-consuming and error-prone, leading to poor user experience and administrative inefficiencies.
+College tech festivals require efficient registration of multiple events, user registrations, and administrative oversight. Traditional manual processes are time-consuming and error-prone, leading to poor user experience and administrative inefficiencies.
 
 ### Solution Approach
-TakeDown 2.0 is a modern, full-stack web application that digitizes the entire event management process. It provides:
+TakeDown 2.0 is a modern, full-stack web application that digitizes the entire event registration process. It provides:
 - **Students**: Easy event discovery and registration
 - **Administrators**: Comprehensive event and user management
 - **Organizers**: Real-time registration tracking and analytics
 
 ### Project Scope
-- **Duration**: 6 months development cycle
 - **Target Users**: 500+ college students, 50+ faculty members
 - **Events Supported**: 10+ technical workshops and competitions
-- **Institution**: Universal Engineering College
 
 ---
 
@@ -54,7 +52,7 @@ Frontend Components:
 
 Backend Services:
 ├── User Management (Registration/Authentication)
-├── Event Management (CRUD Operations)
+├── Event registration (CRUD Operations)
 ├── Registration System (Event Sign-ups)
 └── Admin Interface (Content Management)
 ```
@@ -99,7 +97,7 @@ Backend Services:
 - **Profile Management**: User details and preferences
 - **Role-based Access**: Student vs Admin permissions
 
-#### 2. Event Management
+#### 2. Event Registration
 - **Event Discovery**: Browse events by day and category
 - **Real-time Updates**: Live participant counts
 - **Event Filtering**: Technical vs Non-technical events
@@ -188,7 +186,7 @@ Event-Management/
 
 ---
 
-## 🚦 Installation & Setup
+##  Installation & Setup
 
 ### Prerequisites
 - **Node.js**: 18+ for frontend development
@@ -270,7 +268,7 @@ GET  /api/users/profile/      # User profile
 POST /api/users/logout/       # User logout
 ```
 
-### Event Management Endpoints
+### Event Registration Endpoints
 ```http
 GET    /api/events/           # List all events
 GET    /api/events/{id}/      # Get specific event
@@ -317,7 +315,7 @@ Headers: Authorization: Token abc123...
 
 ---
 
-## 🗄️ Database Design
+##  Database Design
 
 ### Entity Relationship Diagram
 ```
@@ -419,7 +417,7 @@ const EventCard: React.FC<EventCardProps> = ({
 
 ---
 
-## ⚙ Backend Implementation
+##  Backend Implementation
 
 ### Django Architecture
 
@@ -461,7 +459,7 @@ class User(AbstractUser):
 
 #### Events App
 ```python
-# Event management with full CRUD operations
+# Event registration with full CRUD operations
 class EventViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         # Filter events by day or type if requested
@@ -690,22 +688,8 @@ This project is developed for educational purposes as part of the Computer Scien
 
 ##  Conclusion
 
-TakeDown 2.0 represents a comprehensive solution to event management challenges faced by educational institutions. Through the integration of modern web technologies and thoughtful user experience design, the project successfully demonstrates:
+TakeDown 2.0 represents a comprehensive solution to event registration challenges faced by educational institutions. Through the integration of modern web technologies and thoughtful user experience design, the project successfully demonstrates:
 
-### Technical Achievements
-- **Full-Stack Proficiency**: Seamless integration of frontend and backend technologies
-- **Scalable Architecture**: Modular design supporting future enhancements
-- **Security Implementation**: Robust authentication and data protection
-- **Performance Optimization**: Efficient loading and responsive design
-
-### Educational Impact
-- **Digital Transformation**: Modernizing traditional event management processes
-- **User Empowerment**: Intuitive interfaces for both students and administrators
-- **Operational Efficiency**: Streamlined workflows and automated processes
-- **Data Insights**: Foundation for analytics and decision-making
-
-### Future Vision
-TakeDown 2.0 serves as a foundation for broader digital initiatives within Universal Engineering College, demonstrating the potential for technology to enhance educational experiences and administrative efficiency.
 
 The project showcases the practical application of computer science principles in solving real-world problems, preparing students for professional software development careers while contributing meaningfully to their academic community.
 
