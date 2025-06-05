@@ -10,6 +10,7 @@ A robust Django REST API backend for the TakeDown 2.0 event management system. P
 ## 🚀 Features
 
 ### Core Functionality
+
 - **User Authentication**: Custom user model with phone-based authentication
 - **Event Management**: Complete CRUD operations for events
 - **Registration System**: Event registration with payment tracking
@@ -18,6 +19,7 @@ A robust Django REST API backend for the TakeDown 2.0 event management system. P
 - **Data Validation**: Comprehensive input validation and error handling
 
 ### API Capabilities
+
 - **RESTful Endpoints**: Well-structured API following REST principles
 - **Pagination**: Efficient data pagination for large datasets
 - **Filtering & Search**: Advanced filtering options for events
@@ -27,18 +29,21 @@ A robust Django REST API backend for the TakeDown 2.0 event management system. P
 ## 🛠️ Tech Stack
 
 ### Backend Framework
+
 - **Django 5.2+**: High-level Python web framework
 - **Django REST Framework**: Powerful toolkit for building Web APIs
 - **SQLite**: Lightweight database for development
 - **Python 3.8+**: Programming language
 
 ### Authentication & Security
+
 - **Token Authentication**: DRF token-based authentication
 - **Custom User Model**: Extended user model with college-specific fields
 - **Permissions**: Role-based access control
 - **CORS Headers**: Cross-origin request handling
 
 ### Development Tools
+
 - **Django Admin**: Built-in administration interface
 - **Migrations**: Database schema management
 - **Serializers**: Data serialization and validation
@@ -82,6 +87,7 @@ event-management-backend/
 ## 🚦 Getting Started
 
 ### Prerequisites
+
 - Python 3.8 or higher
 - pip (Python package installer)
 - Virtual environment (recommended)
@@ -89,39 +95,45 @@ event-management-backend/
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/your-username/takedown-2.0-backend.git
    cd takedown-2.0-backend
    ```
 
 2. **Create virtual environment**
+
    ```bash
    python -m venv venv
-   
+
    # Windows
    venv\Scripts\activate
-   
+
    # macOS/Linux
    source venv/bin/activate
    ```
 
 3. **Install dependencies**
+
    ```bash
    pip install django djangorestframework django-cors-headers
    ```
 
 4. **Run migrations**
+
    ```bash
    python manage.py makemigrations
    python manage.py migrate
    ```
 
 5. **Create superuser**
+
    ```bash
    python manage.py createsuperuser
    ```
 
 6. **Start development server**
+
    ```bash
    python manage.py runserver
    ```
@@ -133,6 +145,7 @@ event-management-backend/
 ## 📊 Database Models
 
 ### User Model (`users/models.py`)
+
 ```python
 class User(AbstractUser):
     phone = models.CharField(max_length=10, unique=True)      # Primary identifier
@@ -141,11 +154,12 @@ class User(AbstractUser):
     year = models.CharField(max_length=50, blank=True)        # Academic year
     branch = models.CharField(max_length=100, blank=True)     # Academic branch
     created_at = models.DateTimeField(auto_now_add=True)      # Registration timestamp
-    
+
     USERNAME_FIELD = 'phone'  # Login with phone number
 ```
 
 ### Event Model (`events/models.py`)
+
 ```python
 class Event:
     title = models.CharField(max_length=200)                  # Event name
@@ -161,6 +175,7 @@ class Event:
 ```
 
 ### Registration Model (`registrations/models.py`)
+
 ```python
 class Registration:
     user = models.ForeignKey(User)                            # Registered user
@@ -174,6 +189,7 @@ class Registration:
 ## 🔗 API Endpoints
 
 ### Authentication Endpoints
+
 ```http
 POST /api/users/register/          # User registration
 POST /api/users/login/             # User login
@@ -182,6 +198,7 @@ POST /api/users/logout/            # User logout
 ```
 
 ### Event Endpoints
+
 ```http
 GET  /api/events/                  # List all events
 GET  /api/events/{id}/             # Get specific event
@@ -191,6 +208,7 @@ DELETE /api/events/{id}/           # Delete event (admin only)
 ```
 
 ### Registration Endpoints
+
 ```http
 POST /api/registrations/register/{event_id}/    # Register for event
 GET  /api/registrations/my-registrations/       # Get user's registrations
@@ -199,7 +217,9 @@ GET  /api/registrations/my-registrations/       # Get user's registrations
 ## 📝 API Request/Response Examples
 
 ### User Registration
+
 **Request:**
+
 ```json
 POST /api/users/register/
 {
@@ -218,26 +238,29 @@ POST /api/users/register/
 ```
 
 **Response:**
+
 ```json
 {
-    "user": {
-        "id": 1,
-        "username": "john_doe",
-        "first_name": "John",
-        "last_name": "Doe",
-        "email": "john@example.com",
-        "phone": "9876543210",
-        "college": "Universal Engineering College",
-        "year": "Second Year",
-        "branch": "Computer Science"
-    },
-    "token": "9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b",
-    "message": "User registered successfully"
+  "user": {
+    "id": 1,
+    "username": "john_doe",
+    "first_name": "John",
+    "last_name": "Doe",
+    "email": "john@example.com",
+    "phone": "9876543210",
+    "college": "Universal Engineering College",
+    "year": "Second Year",
+    "branch": "Computer Science"
+  },
+  "token": "9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b",
+  "message": "User registered successfully"
 }
 ```
 
 ### User Login
+
 **Request:**
+
 ```json
 POST /api/users/login/
 {
@@ -247,23 +270,26 @@ POST /api/users/login/
 ```
 
 **Response:**
+
 ```json
 {
-    "user": {
-        "id": 1,
-        "username": "john_doe",
-        "first_name": "John",
-        "last_name": "Doe",
-        "email": "john@example.com",
-        "phone": "9876543210"
-    },
-    "token": "9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b",
-    "message": "Login successful"
+  "user": {
+    "id": 1,
+    "username": "john_doe",
+    "first_name": "John",
+    "last_name": "Doe",
+    "email": "john@example.com",
+    "phone": "9876543210"
+  },
+  "token": "9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b",
+  "message": "Login successful"
 }
 ```
 
 ### Event Registration
+
 **Request:**
+
 ```json
 POST /api/registrations/register/1/
 Headers: Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b
@@ -275,30 +301,32 @@ Headers: Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b
 ```
 
 **Response:**
+
 ```json
 {
-    "message": "Registration successful",
-    "registration": {
-        "id": 1,
-        "user": 1,
-        "event": 1,
-        "payment_status": "completed",
-        "amount_paid": "299.00",
-        "registered_at": "2025-06-05T10:30:00Z",
-        "event_details": {
-            "id": 1,
-            "title": "AI/ML Workshop",
-            "date": "2025-06-05",
-            "time": "10:00 AM - 4:00 PM",
-            "fee": "₹299"
-        }
+  "message": "Registration successful",
+  "registration": {
+    "id": 1,
+    "user": 1,
+    "event": 1,
+    "payment_status": "completed",
+    "amount_paid": "299.00",
+    "registered_at": "2025-06-05T10:30:00Z",
+    "event_details": {
+      "id": 1,
+      "title": "AI/ML Workshop",
+      "date": "2025-06-05",
+      "time": "10:00 AM - 4:00 PM",
+      "fee": "₹299"
     }
+  }
 }
 ```
 
 ## 🔧 Configuration
 
 ### Django Settings (`settings.py`)
+
 ```python
 # Database Configuration
 DATABASES = {
@@ -328,6 +356,7 @@ CORS_ALLOWED_ORIGINS = [
 ## 👨‍💼 Admin Interface
 
 ### Admin Features
+
 - **User Management**: View, edit, and manage user accounts
 - **Event Management**: Create, update, and delete events
 - **Registration Tracking**: Monitor event registrations
@@ -335,11 +364,13 @@ CORS_ALLOWED_ORIGINS = [
 - **Bulk Operations**: Bulk actions for efficiency
 
 ### Admin Access
+
 1. Create superuser: `python manage.py createsuperuser`
 2. Visit: `http://localhost:8000/admin/`
 3. Login with superuser credentials
 
 ### Adding Events via Admin
+
 1. Navigate to Events section
 2. Click "Add Event"
 3. Fill in event details:
@@ -353,6 +384,7 @@ CORS_ALLOWED_ORIGINS = [
 ## 🧪 Testing
 
 ### Running Tests
+
 ```bash
 # Run all tests
 python manage.py test
@@ -367,7 +399,9 @@ python manage.py test --verbosity=2
 ```
 
 ### API Testing
+
 Use tools like Postman, curl, or Django REST Framework's browsable API:
+
 ```bash
 # Test event listing
 curl http://localhost:8000/api/events/
@@ -381,6 +415,7 @@ curl -X POST http://localhost:8000/api/users/register/ \
 ## 🚀 Deployment
 
 ### Production Considerations
+
 1. **Database**: Switch to PostgreSQL or MySQL
 2. **Environment Variables**: Use django-environ for secrets
 3. **Static Files**: Configure static file serving
@@ -388,6 +423,7 @@ curl -X POST http://localhost:8000/api/users/register/ \
 5. **CORS**: Configure proper CORS settings
 
 ### Environment Setup
+
 ```bash
 # Install production dependencies
 pip install gunicorn psycopg2-binary
@@ -402,16 +438,19 @@ gunicorn event_management.wsgi:application
 ## 📈 Performance & Optimization
 
 ### Database Optimization
+
 - Proper indexing on frequently queried fields
 - Database connection pooling
 - Query optimization with select_related()
 
 ### Caching
+
 - Redis for session caching
 - Database query caching
 - Template fragment caching
 
 ### Security
+
 - HTTPS enforcement
 - CSRF protection
 - Rate limiting
@@ -438,6 +477,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Support
 
 For backend-specific support:
+
 - Email: backend@takedown2025.com
 - API Documentation: `http://localhost:8000/api/docs/`
 - GitHub Issues: [Backend Issues](https://github.com/your-username/takedown-2.0-backend/issues)
@@ -445,6 +485,7 @@ For backend-specific support:
 ## 📝 Changelog
 
 ### Version 1.0.0 (Current)
+
 - Initial backend implementation
 - User authentication system
 - Event management APIs
