@@ -13,3 +13,4 @@ class EventDetailView(generics.RetrieveAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
     permission_classes = [AllowAny]
+    lookup_field = 'pk'  # This ensures it uses the ID from the URL
