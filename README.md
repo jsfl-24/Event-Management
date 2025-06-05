@@ -28,6 +28,12 @@ TakeDown 2.0 is a modern, full-stack web application that digitizes the entire e
 - **Events Supported**: 10+ technical workshops and competitions
 
 ---
+##  Project Repository
+
+https://github.com/jsfl-24/Event-Management
+
+---
+
 
 ##  System Architecture
 
