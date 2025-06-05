@@ -668,4 +668,3 @@ The project showcases the practical application of computer science principles i
 
 *Built with ❤ by the Computer Science Department, Universal Engineering College*
 
-Project completed as part of the Final Year Technical Project (2024-2025)
