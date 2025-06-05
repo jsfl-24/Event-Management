@@ -79,13 +79,15 @@ export default function Navigation() {
 
             {userDetails ? (
               <div className="flex items-center space-x-4">
-                {/* Dashboard Link */}
-                <Link
-                  href="/profile"
+                {/* Admin Link */}
+                <a
+                  href="http://127.0.0.1:8000/admin/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-zinc-400 hover:text-white transition-colors duration-200 font-medium"
                 >
-                  Dashboard
-                </Link>
+                  Admin
+                </a>
 
                 {/* Logout Button */}
                 <button
@@ -175,14 +177,16 @@ export default function Navigation() {
 
               {userDetails ? (
                 <div className="pt-2 border-t border-zinc-700 mt-2">
-                  {/* Dashboard Link */}
-                  <Link
-                    href="/profile"
+                  {/* Admin Link */}
+                  <a
+                    href="http://127.0.0.1:8000/admin/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     onClick={() => setIsOpen(false)}
                     className="block py-3 px-2 text-zinc-400 hover:text-white transition-colors duration-200 font-medium rounded-lg hover:bg-zinc-800"
                   >
-                    Dashboard
-                  </Link>
+                    Admin
+                  </a>
 
                   {/* Logout Button */}
                   <button

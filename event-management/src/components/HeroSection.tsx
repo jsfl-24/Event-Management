@@ -50,12 +50,14 @@ export default function HeroSection() {
                 Register Now
               </Link>
             ) : (
-              <Link
-                href="/profile"
+              <a
+                href="http://127.0.0.1:8000/admin/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-zinc-700 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-zinc-600 transition duration-300 border border-zinc-600"
               >
-                My Dashboard
-              </Link>
+                Admin Panel
+              </a>
             )}
           </div>
 
