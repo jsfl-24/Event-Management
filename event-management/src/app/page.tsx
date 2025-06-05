@@ -5,6 +5,7 @@ import EventsSection from "@/components/EventsSection";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
+import SponsorsSection from "@/components/SponsorsSection";
 import { useEffect, useState } from "react";
 import api from "@/lib/api";
 
@@ -110,6 +111,7 @@ export default function Home() {
       <HeroSection />
       <EventsSection events={events} />
       <AboutSection />
+      <SponsorsSection />
       <Footer />
     </div>
   );

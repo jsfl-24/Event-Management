@@ -65,6 +65,12 @@ export default function Navigation() {
             >
               About
             </a>
+            <a
+              href="#sponsors"
+              className="text-white hover:text-gray-300 transition"
+            >
+              Sponsors
+            </a>
 
             {userDetails ? (
               <>
@@ -119,6 +125,12 @@ export default function Navigation() {
               className="block py-2 text-white hover:text-gray-300"
             >
               About
+            </a>
+            <a
+              href="#sponsors"
+              className="block py-2 text-white hover:text-gray-300"
+            >
+              Sponsors
             </a>
 
             {userDetails ? (
